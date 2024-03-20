@@ -1,4 +1,5 @@
 # Variables
+SBIN = $(shell find sbin -type f)
 HTML = html
 FONTS = $(shell find fonts -type f)
 
@@ -13,6 +14,9 @@ clean:
 
 # Install rule
 install:
+	install -d $(DESTDIR)/$(SBINDIR)
+	install -m755 $(SBIN) $(DESTDIR)/$(SBINDIR)
+
 	install -d $(DESTDIR)/$(SHAREDIR)
 	cp -r $(HTML) $(DESTDIR)/$(SHAREDIR)
 

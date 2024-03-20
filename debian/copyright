@@ -1,6 +1,6 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
-Upstream-Name: minios-html
-Source: <https://github.com/minios-linux/minios-tools>
+Upstream-Name: minios-welcome
+Source: <https://github.com/minios-linux/minios-welcome>
 
 Files: *
 Copyright: 2024 crims0n <crims0n@minios.dev>

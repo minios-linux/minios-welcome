@@ -1,0 +1,47 @@
+#!/bin/bash
+
+# Import the library and configuration file. Exit if they're not present.
+. /usr/lib/minios/libminioslive || exit
+. /etc/minios/config || exit
+
+# Check the distribution type and assign the path to the Firefox branding file accordingly
+if [ "${DISTRIBUTION_TYPE}" = "debian" ]; then
+    FIREFOX_BRANDING="/usr/share/firefox-esr/browser/defaults/preferences/firefox-branding.js"
+elif [ "${DISTRIBUTION_TYPE}" = "ubuntu" ]; then
+    FIREFOX_BRANDING="/etc/firefox/syspref.js"
+fi
+
+# If the Firefox branding file exists and hasn't been backed up yet and MiniOS hasn't been appended into it, then do the following:
+if [ -f "${FIREFOX_BRANDING}" ] && [ ! -f "${FIREFOX_BRANDING}.bak" ] && ! grep -q minios "${FIREFOX_BRANDING}"; then
+    # Backup the original file
+    cp "${FIREFOX_BRANDING}" "${FIREFOX_BRANDING}.bak"
+
+    # Depending on the distribution type, change the default Firefox welcome page to the MiniOS's custom page
+    if [ "${DISTRIBUTION_TYPE}" = "debian" ]; then
+        sed -i "s,about:welcome,file:///usr/share/minios/html/index.html,g" "${FIREFOX_BRANDING}"
+    elif [ "${DISTRIBUTION_TYPE}" = "ubuntu" ]; then
+        cat <<EOF >>"${FIREFOX_BRANDING}"
+pref("startup.homepage_welcome_url", "file:///usr/share/minios/html/index.html");
+EOF
+    fi
+
+    # Depending on the desktop environment, append additional preferences into the Firefox branding file to customise the firefox interface
+    if [[ "${DESKTOP_ENVIRONMENT}" == *"flux"* ]]; then
+        cat <<'EOF' >>"${FIREFOX_BRANDING}"
+pref("general.smoothScroll", false);
+pref("browser.uidensity", 1);
+pref("browser.newtabpage.activity-stream.feeds.topsites", false);
+pref("browser.toolbars.bookmarks.visibility", "never");
+EOF
+    else
+        cat <<'EOF' >>"${FIREFOX_BRANDING}"
+pref("browser.tabs.drawInTitlebar", true);
+pref("general.smoothScroll", false);
+pref("browser.compactmode.show", true);
+pref("browser.uidensity", 1);
+pref("browser.tabs.inTitlebar", 1);
+pref("browser.newtabpage.activity-stream.feeds.topsites", false);
+pref("browser.toolbars.bookmarks.visibility", "never");
+EOF
+    fi
+fi

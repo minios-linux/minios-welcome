@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Import the library and configuration file. Exit if they're not present.
+. /usr/lib/minios/libminioslive || exit
+. /etc/minios/config || exit
+
+# Check the distribution type and assign the path to the Firefox branding file accordingly
+if [ "${DISTRIBUTION_TYPE}" = "debian" ]; then
+    FIREFOX_BRANDING="/usr/share/firefox-esr/browser/defaults/preferences/firefox-branding.js"
+elif [ "${DISTRIBUTION_TYPE}" = "ubuntu" ]; then
+    FIREFOX_BRANDING="/etc/firefox/syspref.js"
+fi
+
+if [ -f "${FIREFOX_BRANDING}.bak" ] && grep -q minios "${FIREFOX_BRANDING}"; then
+    # Restore the original file
+    mv "${FIREFOX_BRANDING}.bak" "${FIREFOX_BRANDING}" || true
+fi
+
+#DEBHELPER#
