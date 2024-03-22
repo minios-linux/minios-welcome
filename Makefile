@@ -3,6 +3,7 @@ SBIN = $(shell find sbin -type f)
 HTML = html
 FONTS = $(shell find fonts -type f)
 
+SBINDIR = usr/sbin
 SHAREDIR = usr/share/minios
 FONTSDIR = usr/share/fonts
 

@@ -17,7 +17,7 @@ elif [ "${DISTRIBUTION_TYPE}" = "ubuntu" ]; then
     FIREFOX_BRANDING="/etc/firefox/syspref.js"
 fi
 
-if [ -f "${FIREFOX_BRANDING}" ] && [ ! -f "${FIREFOX_BRANDING}.bak" ] && ! grep -q minios "${FIREFOX_BRANDING}"; then
+if [ -f "${FIREFOX_BRANDING}" ] && ! grep -q minios "${FIREFOX_BRANDING}"; then
     cp "${FIREFOX_BRANDING}" "${FIREFOX_BRANDING}.bak"
     if [ "${DISTRIBUTION_TYPE}" = "debian" ]; then
         sed -i "s,about:welcome,file:///usr/share/minios/html/index.html,g" "${FIREFOX_BRANDING}"
@@ -44,6 +44,8 @@ pref("browser.newtabpage.activity-stream.feeds.topsites", false);
 pref("browser.toolbars.bookmarks.visibility", "never");
 EOF
     fi
+elif [ -f "${FIREFOX_BRANDING}.bak" ] && [ ! -f "${FIREFOX_BRANDING}" ]; then
+    rm "${FIREFOX_BRANDING}.bak"
 fi
 
 #DEBHELPER#

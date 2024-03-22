@@ -1,0 +1,9 @@
+[Unit]
+Description=Changes the browser start page
+
+[Service]
+Type=oneshot
+ExecStart=/usr/sbin/minios-welcome-patch
+
+[Install]
+RequiredBy=minios-welcome.path

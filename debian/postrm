@@ -8,6 +8,8 @@ fi
 
 if [ -f "${FIREFOX_BRANDING}.bak" ] && [ -f "${FIREFOX_BRANDING}" ] && grep -q minios "${FIREFOX_BRANDING}"; then
     mv -f "${FIREFOX_BRANDING}.bak" "${FIREFOX_BRANDING}"
+elif [ -f "${FIREFOX_BRANDING}.bak" ] && [ ! -f "${FIREFOX_BRANDING}" ]; then
+    rm "${FIREFOX_BRANDING}.bak"
 fi
 
 #DEBHELPER#
