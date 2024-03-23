@@ -8,7 +8,7 @@ Homepage: https://minios.dev
 
 Package: minios-welcome
 Architecture: all
-Depends: ${misc:Depends}
+Depends: fonts-roboto-light, ${misc:Depends}
 Description: MiniOS HTML welcome page.
  MiniOS welcome page - HTML page that opens when you start your
  browser for the first time in MiniOS.
