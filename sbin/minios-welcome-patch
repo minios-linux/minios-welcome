@@ -1,51 +1,54 @@
 #!/bin/bash
 
+# Load the configuration variables
 . /etc/minios/config
 
+# Set the path of FIREFOX_BRANDING depending on the value of DISTRIBUTION.
 case "${DISTRIBUTION}" in
-stretch | buster | bullseye | bookworm | trixie | sid)
+"stretch" | "buster" | "bullseye" | "bookworm" | "trixie" | "sid")
     DISTRIBUTION_TYPE="debian"
+    FIREFOX_BRANDING="/usr/share/firefox-esr/browser/defaults/preferences/firefox-branding.js"
     ;;
-bionic | focal | jammy | noble)
+"bionic" | "focal" | "jammy" | "noble")
     DISTRIBUTION_TYPE="ubuntu"
+    FIREFOX_BRANDING="/etc/firefox/syspref.js"
     ;;
 esac
 
-if [ "${DISTRIBUTION_TYPE}" = "debian" ]; then
-    FIREFOX_BRANDING="/usr/share/firefox-esr/browser/defaults/preferences/firefox-branding.js"
-elif [ "${DISTRIBUTION_TYPE}" = "ubuntu" ]; then
-    FIREFOX_BRANDING="/etc/firefox/syspref.js"
+# Apply preferred settings (PREF) depending on the chosen desktop environment.
+if [[ "${DESKTOP_ENVIRONMENT}" == *"flux"* ]]; then
+    PREF='pref("general.smoothScroll", false);
+          pref("browser.uidensity", 1);
+          pref("browser.newtabpage.activity-stream.feeds.topsites", false);
+          pref("browser.toolbars.bookmarks.visibility", "never");'
+else
+    PREF='pref("browser.tabs.drawInTitlebar", true);
+          pref("general.smoothScroll", false);
+          pref("browser.compactmode.show", true);
+          pref("browser.uidensity", 1);
+          pref("browser.tabs.inTitlebar", 1);
+          pref("browser.newtabpage.activity-stream.feeds.topsites", false);
+          pref("browser.toolbars.bookmarks.visibility", "never");'
 fi
 
-if [ -f "${FIREFOX_BRANDING}" ] && ! grep -q minios "${FIREFOX_BRANDING}"; then
+# If no backup exists for the FIREFOX_BRANDING file and 'minios' is not found within its content, create a backup and apply necessary changes
+if [ ! -f "${FIREFOX_BRANDING}.bak" ] && [ -f "${FIREFOX_BRANDING}" ] && ! grep -q minios "${FIREFOX_BRANDING}"; then
     cp "${FIREFOX_BRANDING}" "${FIREFOX_BRANDING}.bak"
+    echo "Backup for ${FIREFOX_BRANDING} created."
+
     if [ "${DISTRIBUTION_TYPE}" = "debian" ]; then
-        sed -i "s,about:welcome,file:///usr/share/minios/html/index.html,g" "${FIREFOX_BRANDING}"
+        sed -i 's,about:welcome,file:///usr/share/minios/html/index.html,g' "${FIREFOX_BRANDING}"
     elif [ "${DISTRIBUTION_TYPE}" = "ubuntu" ]; then
-        cat <<EOF >>"${FIREFOX_BRANDING}"
-pref("startup.homepage_welcome_url", "file:///usr/share/minios/html/index.html");
-EOF
+        echo 'pref("startup.homepage_welcome_url", "file:///usr/share/minios/html/index.html");' >>"${FIREFOX_BRANDING}"
     fi
-    if [[ "${DESKTOP_ENVIRONMENT}" == *"flux"* ]]; then
-        cat <<'EOF' >>"${FIREFOX_BRANDING}"
-pref("general.smoothScroll", false);
-pref("browser.uidensity", 1);
-pref("browser.newtabpage.activity-stream.feeds.topsites", false);
-pref("browser.toolbars.bookmarks.visibility", "never");
-EOF
-    else
-        cat <<'EOF' >>"${FIREFOX_BRANDING}"
-pref("browser.tabs.drawInTitlebar", true);
-pref("general.smoothScroll", false);
-pref("browser.compactmode.show", true);
-pref("browser.uidensity", 1);
-pref("browser.tabs.inTitlebar", 1);
-pref("browser.newtabpage.activity-stream.feeds.topsites", false);
-pref("browser.toolbars.bookmarks.visibility", "never");
-EOF
-    fi
+
+    echo "${PREF}" >>"${FIREFOX_BRANDING}"
+    echo "Changes applied to ${FIREFOX_BRANDING}."
+
+# If a backup for FIREFOX_BRANDING exists and the original file is missing, remove the backup
 elif [ -f "${FIREFOX_BRANDING}.bak" ] && [ ! -f "${FIREFOX_BRANDING}" ]; then
     rm "${FIREFOX_BRANDING}.bak"
+    echo "Backup for ${FIREFOX_BRANDING} removed."
 fi
 
-#DEBHELPER#
+exit 0

@@ -2,10 +2,8 @@
 Description=Watch browser configuration for changes
 
 [Path]
-PathModified=/usr/share/firefox-esr/browser/defaults/preferences/firefox-branding.js
-PathExists=/usr/share/firefox-esr/browser/defaults/preferences/firefox-branding.js
-PathModified=/etc/firefox/syspref.js
-PathExists=/etc/firefox/syspref.js
+PathChanged=/usr/share/firefox-esr/browser/defaults/preferences/firefox-branding.js
+PathChanged=/etc/firefox/syspref.js
 
 [Install]
 WantedBy=multi-user.target
