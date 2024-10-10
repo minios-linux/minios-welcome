@@ -1,0 +1,38 @@
+#!/usr/bin/env python3
+
+import json
+import argparse
+import os
+
+def convert_json_to_js(input_file, output_file):
+    if not os.path.isfile(input_file):
+        print(f"Error: File '{input_file}' not found.")
+        return
+    
+    with open(input_file, "r", encoding="utf-8") as f:
+        data = json.load(f)
+    
+    if "translations" not in data:
+        print(f"Error: 'translations' key not found in '{input_file}'.")
+        return
+    
+    js_translations = "window.translations = {\n"
+    for key, value in data["translations"].items():
+        js_translations += f'    "{key}": "{value}",\n'
+    js_translations = js_translations.rstrip(",\n") + "\n};"
+    
+    with open(output_file, "w", encoding="utf-8") as f:
+        f.write(js_translations)
+    
+    print(f"JS file created: {output_file}")
+
+def main():
+    parser = argparse.ArgumentParser(description='Convert JSON translation files to JS.')
+    parser.add_argument('input_file', help='Path to the input JSON file.')
+    parser.add_argument('output_file', help='Path to the output JS file.')
+    args = parser.parse_args()
+    
+    convert_json_to_js(args.input_file, args.output_file)
+
+if __name__ == "__main__":
+    main()

@@ -2,6 +2,7 @@
 SBIN = $(shell find sbin -type f)
 HTML = html
 
+BINDIR = usr/bin
 SBINDIR = usr/sbin
 SHAREDIR = usr/share/minios
 
