@@ -1,15 +1,10 @@
-// Get the user's language from the browser
-let userLanguage = navigator.language || navigator.userLanguage;
-
-// Use the first two characters of the user's language (e.g., "en", "ru")
-userLanguage = userLanguage.substr(0, 2);
-
-// Determine the script file to use based on the user's language
-let languageScript = `./js/translations/${userLanguage}.js`;
+// Get the user's locale from the browser
+const fullLocale  = navigator.language || navigator.userLanguage;
+const shortLocale = fullLocale.substr(0, 2);
+let loadedLocale  = fullLocale;
 
 // Dynamically create a script element
 const script = document.createElement('script');
-script.src = languageScript;
 
 script.onload = () => {
     let translations = window.translations;
@@ -46,8 +41,19 @@ script.onload = () => {
 };
 
 script.onerror = () => {
-    console.log('Error loading the translation script.');
+    if (loadedLocale !== shortLocale) {
+        console.log('Translation script for full locale failed, falling back to short locale:', shortLocale);
+        loadedLocale = shortLocale;
+        script.src = `./js/translations/${shortLocale}.js`;
+        console.log('Attempting to load fallback translations from', script.src);
+    } else {
+        console.log('Error loading the translation script.');
+    }
 };
+
+// start with full locale, fallback happens in onerror
+script.src = `./js/translations/${loadedLocale}.js`;
+console.log('Attempting to load translations for locale:', loadedLocale, 'from', script.src);
 
 // Append the script to the document
 document.head.appendChild(script);
