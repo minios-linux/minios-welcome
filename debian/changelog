@@ -1,4 +1,4 @@
-minios-welcome (5.2) UNRELEASED; urgency=medium
+minios-welcome (5.2) unstable; urgency=medium
 
   * Enhance translation loading with improved locale detection and fallback
     mechanism
