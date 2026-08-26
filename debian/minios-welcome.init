@@ -1,0 +1,43 @@
+#!/bin/sh
+### BEGIN INIT INFO
+# Provides:          minios-welcome
+# Required-Start:    $local_fs
+# Required-Stop:
+# Should-Start:      live-config
+# Default-Start:     2 3 4 5
+# Default-Stop:
+# Short-Description: Apply MiniOS Firefox welcome-page preferences
+# Description:       Configure supported Firefox installations to show the
+#                    MiniOS welcome page.
+### END INIT INFO
+
+PATH=/sbin:/usr/sbin:/bin:/usr/bin
+NAME=minios-welcome
+DESC="MiniOS Firefox welcome-page preferences"
+DAEMON=/usr/sbin/minios-welcome-patch
+
+[ -x "$DAEMON" ] || exit 0
+
+case "${1:-}" in
+    start|restart|force-reload)
+        printf 'Applying %s: %s' "$DESC" "$NAME"
+        if "$DAEMON"; then
+            echo '.'
+        else
+            status=$?
+            echo ' failed.'
+            exit "$status"
+        fi
+        ;;
+    stop)
+        ;;
+    status)
+        "$DAEMON" --check
+        ;;
+    *)
+        echo "Usage: /etc/init.d/$NAME {start|stop|status|restart|force-reload}" >&2
+        exit 3
+        ;;
+esac
+
+exit 0

@@ -1,5 +1,6 @@
 [Unit]
 Description=Changes the browser start page
+Documentation=man:minios-welcome-patch(8)
 
 [Service]
 Type=oneshot

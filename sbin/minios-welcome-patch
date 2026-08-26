@@ -1,49 +1,53 @@
-#!/bin/bash
+#!/bin/sh
+set -e
 
-# Load the configuration variables
-. /etc/minios/config
+MARKER='// BEGIN MINIOS-WELCOME'
+FIREFOX_BRANDING_PATHS='
+/usr/share/firefox-esr/browser/defaults/preferences/firefox-branding.js
+/etc/firefox/syspref.js
+/etc/firefox-esr/syspref.js'
 
-# Define the FIREFOX_BRANDING paths
-FIREFOX_BRANDING_PATHS=(
-    "/usr/share/firefox-esr/browser/defaults/preferences/firefox-branding.js"
-    "/etc/firefox/syspref.js"
-    "/etc/firefox-esr/syspref.js"
-)
+if [ "${1:-}" = "--check" ]; then
+    found=0
+    for firefox_branding in $FIREFOX_BRANDING_PATHS; do
+        [ -f "$firefox_branding" ] || continue
+        found=1
+        grep -Fqx "$MARKER" "$firefox_branding" || exit 3
+    done
+    [ "$found" -eq 1 ] || exit 4
+    exit 0
+elif [ "$#" -ne 0 ]; then
+    echo "Usage: minios-welcome-patch [--check]" >&2
+    exit 2
+fi
 
-# Apply settings to each file if it exists
-for FIREFOX_BRANDING in "${FIREFOX_BRANDING_PATHS[@]}"; do
-    if [ -f "$FIREFOX_BRANDING" ]; then
-        # If no backup exists for the FIREFOX_BRANDING file and 'minios' is not found within its content, create a backup and apply necessary changes
-        if [ ! -f "${FIREFOX_BRANDING}.bak" ] && ! grep -q minios "${FIREFOX_BRANDING}"; then
-            cp "${FIREFOX_BRANDING}" "${FIREFOX_BRANDING}.bak"
-            echo "Backup for ${FIREFOX_BRANDING} created."
+DESKTOP_ENVIRONMENT=
+[ ! -r /etc/minios/config ] || . /etc/minios/config
 
-            # Apply preferred settings (PREF) depending on the chosen desktop environment.
-            if [[ "${DESKTOP_ENVIRONMENT}" == *"flux"* ]]; then
-                PREF='pref("general.smoothScroll", false);
-                pref("browser.uidensity", 1);
-                pref("browser.newtabpage.activity-stream.feeds.topsites", false);
-                pref("browser.toolbars.bookmarks.visibility", "never");'
-            else
-                PREF='pref("browser.tabs.drawInTitlebar", true);
-                pref("general.smoothScroll", false);
-                pref("browser.compactmode.show", true);
-                pref("browser.uidensity", 1);
-                pref("browser.tabs.inTitlebar", 1);
-                pref("browser.newtabpage.activity-stream.feeds.topsites", false);
-                pref("browser.toolbars.bookmarks.visibility", "never");'
-            fi
-
-            echo 'pref("startup.homepage_welcome_url", "file:///usr/share/minios/html/index.html");' >>"${FIREFOX_BRANDING}"
-            echo "${PREF}" >>"${FIREFOX_BRANDING}"
-            echo "Changes applied to ${FIREFOX_BRANDING}."
-
-        # If a backup for FIREFOX_BRANDING exists and the original file is missing, remove the backup
-        elif [ -f "${FIREFOX_BRANDING}.bak" ] && [ ! -f "${FIREFOX_BRANDING}" ]; then
-            rm "${FIREFOX_BRANDING}.bak"
-            echo "Backup for ${FIREFOX_BRANDING} removed."
-        fi
+for firefox_branding in $FIREFOX_BRANDING_PATHS; do
+    if [ ! -f "$firefox_branding" ]; then
+        rm -f "${firefox_branding}.bak"
+        continue
     fi
-done
 
-exit 0
+    grep -Fqx "$MARKER" "$firefox_branding" && continue
+
+    cp -f "$firefox_branding" "${firefox_branding}.bak"
+    {
+        echo "$MARKER"
+        echo 'pref("startup.homepage_welcome_url", "file:///usr/share/minios/html/index.html");'
+        case "${DESKTOP_ENVIRONMENT:-}" in
+            *flux*) ;;
+            *)
+                echo 'pref("browser.tabs.drawInTitlebar", true);'
+                echo 'pref("browser.compactmode.show", true);'
+                echo 'pref("browser.tabs.inTitlebar", 1);'
+                ;;
+        esac
+        echo 'pref("general.smoothScroll", false);'
+        echo 'pref("browser.uidensity", 1);'
+        echo 'pref("browser.newtabpage.activity-stream.feeds.topsites", false);'
+        echo 'pref("browser.toolbars.bookmarks.visibility", "never");'
+        echo '// END MINIOS-WELCOME'
+    } >>"$firefox_branding"
+done

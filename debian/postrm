@@ -1,15 +1,21 @@
-#!/bin/bash
+#!/bin/sh
+set -e
 
-if [ -f "/usr/share/firefox-esr/browser/defaults/preferences/firefox-branding.js" ]; then
-    FIREFOX_BRANDING="/usr/share/firefox-esr/browser/defaults/preferences/firefox-branding.js"
-elif [ -f "/etc/firefox/syspref.js" ]; then
-    FIREFOX_BRANDING="/etc/firefox/syspref.js"
-fi
-
-if [ -f "${FIREFOX_BRANDING}.bak" ] && [ -f "${FIREFOX_BRANDING}" ] && grep -q minios "${FIREFOX_BRANDING}"; then
-    mv -f "${FIREFOX_BRANDING}.bak" "${FIREFOX_BRANDING}"
-elif [ -f "${FIREFOX_BRANDING}.bak" ] && [ ! -f "${FIREFOX_BRANDING}" ]; then
-    rm "${FIREFOX_BRANDING}.bak"
-fi
+case "$1" in
+    remove|purge)
+        for firefox_branding in \
+            /usr/share/firefox-esr/browser/defaults/preferences/firefox-branding.js \
+            /etc/firefox/syspref.js \
+            /etc/firefox-esr/syspref.js
+        do
+            [ -f "${firefox_branding}.bak" ] || continue
+            if [ -f "$firefox_branding" ] && grep -Fqx '// BEGIN MINIOS-WELCOME' "$firefox_branding"; then
+                mv -f "${firefox_branding}.bak" "$firefox_branding"
+            else
+                rm -f "${firefox_branding}.bak"
+            fi
+        done
+        ;;
+esac
 
 #DEBHELPER#

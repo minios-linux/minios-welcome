@@ -1,0 +1,11 @@
+# Debian package build artifacts
+__pycache__/
+*.py[cod]
+
+debian/.debhelper/
+debian/debhelper-build-stamp
+debian/files
+debian/*.debhelper
+debian/*.substvars
+debian/minios-welcome/
+debian/tmp/

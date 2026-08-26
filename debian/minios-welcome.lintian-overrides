@@ -1,0 +1,4 @@
+# MiniOS must provide an offline, self-contained welcome page before APT is usable.
+minios-welcome: embedded-javascript-library please use libjs-jquery [usr/share/minios/html/js/jquery.min.js]
+# This one-shot script is standalone and does not use lsb-base helper functions.
+minios-welcome: init.d-script-does-not-source-init-functions [etc/init.d/minios-welcome]

@@ -1,0 +1,31 @@
+.TH MINIOS-WELCOME-PATCH 8 "August 2026" "MiniOS" "System Administration"
+.SH NAME
+minios-welcome-patch \- configure the Firefox MiniOS welcome page
+.SH SYNOPSIS
+.B minios-welcome-patch
+.RB [ \-\-check ]
+.SH DESCRIPTION
+.B minios-welcome-patch
+adds a managed block of MiniOS preferences to each supported Firefox system
+configuration file. Before changing a file, it stores the unmodified contents
+in a file with the
+.B .bak
+suffix. Repeated invocations do not duplicate the managed block.
+.PP
+Desktop-specific preferences are selected using
+.BR /etc/minios/config .
+.SH OPTIONS
+.TP
+.B \-\-check
+Exit with status 0 when every existing supported Firefox configuration file
+contains the MiniOS managed block. Exit with status 3 when an existing file is
+not configured, or 4 when no supported configuration file exists.
+.SH FILES
+.TP
+.B /etc/minios/config
+MiniOS system configuration.
+.TP
+.B /usr/share/minios/html/index.html
+Welcome page configured as the Firefox startup welcome URL.
+.SH SEE ALSO
+.BR firefox (1)

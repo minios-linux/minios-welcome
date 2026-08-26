@@ -1,0 +1,3 @@
+interest-noawait /usr/share/firefox-esr/browser/defaults/preferences/firefox-branding.js
+interest-noawait /etc/firefox/syspref.js
+interest-noawait /etc/firefox-esr/syspref.js

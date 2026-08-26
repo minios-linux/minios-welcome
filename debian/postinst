@@ -1,0 +1,10 @@
+#!/bin/sh
+set -e
+
+PATH=/sbin:/usr/sbin:/bin:/usr/bin
+
+if [ "$1" = triggered ]; then
+    minios-welcome-patch
+fi
+
+#DEBHELPER#
