@@ -1,0 +1,25 @@
+# VCS metadata
+tar-ignore = .git
+tar-ignore = .gitignore
+
+# Python caches and generated translation output
+tar-ignore = __pycache__
+tar-ignore = *.py[cod]
+tar-ignore = html/js/translations/en.js
+tar-ignore = html/js/translations/en.js.tmp
+
+# Debian package artifacts and build state
+tar-ignore = *.build
+tar-ignore = *.buildinfo
+tar-ignore = *.changes
+tar-ignore = *.deb
+tar-ignore = *.dsc
+tar-ignore = *.tar.*
+tar-ignore = debian/.debhelper
+tar-ignore = debian/debhelper-build-stamp
+tar-ignore = debian/files
+tar-ignore = debian/*.debhelper
+tar-ignore = debian/*.log
+tar-ignore = debian/*.substvars
+tar-ignore = debian/minios-welcome
+tar-ignore = debian/tmp

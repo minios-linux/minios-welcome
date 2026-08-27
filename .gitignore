@@ -1,11 +1,19 @@
 # Debian package build artifacts
 __pycache__/
 *.py[cod]
+/html/js/translations/en.js.tmp
 
+*.build
+*.buildinfo
+*.changes
+*.deb
+*.dsc
+*.tar.*
 debian/.debhelper/
 debian/debhelper-build-stamp
 debian/files
 debian/*.debhelper
+debian/*.log
 debian/*.substvars
 debian/minios-welcome/
 debian/tmp/
