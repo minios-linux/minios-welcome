@@ -1,3 +1,9 @@
+minios-welcome (6.0.2) unstable; urgency=medium
+
+  * Refresh all supported translations.
+
+ -- crims0n <crims0n@minios.dev>  Tue, 01 Sep 2026 01:31:32 +0300
+
 minios-welcome (6.0.1) unstable; urgency=medium
 
   * Exclude VCS metadata and generated build/test artifacts
