@@ -12,6 +12,7 @@ minios-welcome (6.0.3) unstable; urgency=medium
     tests.
   * Add compact alpha WebM runtime assets while keeping raw authoring videos out
     of Debian source packages.
+  * Keep runtime Mio assets in source packages so clean rebuilds are complete.
 
  -- crims0n <crims0n@minios.dev>  Fri, 04 Sep 2026 15:29:33 +0300
 

@@ -6,7 +6,7 @@ tar-ignore = .gitignore
 tar-ignore = __pycache__
 tar-ignore = *.py[cod]
 tar-ignore = html/locales
-tar-ignore = mio
+tar-ignore = minios-welcome/mio
 
 # Debian package artifacts and build state
 tar-ignore = *.build
