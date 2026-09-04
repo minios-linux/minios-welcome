@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="{{language}}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, viewport-fit=cover">
+  <meta name="mobile-web-app-capable" content="yes">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <title>{{page.title}}</title>
+  <link href="../css/welcome.css" rel="stylesheet">
+  <script src="../js/welcome.js"></script>
+</head>
+<body>
+  <nav class="topbar" aria-label="MiniOS">
+    <ul class="menu">
+      <li><a href="https://minios.dev" target="_blank" rel="noopener"><img src="../assets/icons/minios.svg" alt=""> {{nav.website}}</a></li>
+      <li><a href="https://t.me/s/minios_news" target="_blank" rel="noopener"><img src="../assets/icons/telegram.svg" alt=""> {{nav.news}}</a></li>
+      <li><a href="https://t.me/minios_chat" target="_blank" rel="noopener"><img src="../assets/icons/telegram.svg" alt=""> {{nav.community}}</a></li>
+      <li><a href="https://minios.dev/docs" target="_blank" rel="noopener"><img src="../assets/icons/book.svg" alt=""> {{nav.documentation}}</a></li>
+      <li><a href="https://github.com/minios-linux/minios-live" target="_blank" rel="noopener"><img src="../assets/icons/github.svg" alt=""> {{nav.source_code}}</a></li>
+    </ul>
+  </nav>
+
+  <main class="hero">
+    <div class="hero-inner">
+      <div class="hero-main">
+        <div class="hero-copy">
+          <h1>{{hero.title}}</h1>
+          <p>{{hero.description}}</p>
+        </div>
+        <div class="hero-preview">
+          <img src="../assets/img/minios-img.jpg" alt="MiniOS" width="605" height="340">
+        </div>
+      </div>
+
+      <section class="support-grid">
+        <article class="support-card support-telegram">
+          <span class="support-icon"><img src="../assets/icons/telegram.svg" alt=""></span>
+          <div class="support-copy">
+            <h2>{{support.telegram.title}}</h2>
+            <p>{{support.telegram.description}}</p>
+          </div>
+          <a class="support-action" href="https://t.me/minios_news" target="_blank" rel="noopener">{{support.telegram.action}}</a>
+        </article>
+
+        <article class="support-card support-github">
+          <span class="support-icon"><img src="../assets/icons/star.svg" alt=""></span>
+          <div class="support-copy">
+            <h2>{{support.github.title}}</h2>
+            <p>{{support.github.description}}</p>
+          </div>
+          <a class="support-action" href="https://github.com/minios-linux/minios-live" target="_blank" rel="noopener">{{support.github.action}}</a>
+        </article>
+      </section>
+    </div>
+  </main>
+
+  <aside class="mio-companion" aria-live="polite" aria-label="Mio">
+    <div class="mio-bubble" aria-hidden="true">
+      <p class="mio-message"></p>
+    </div>
+    <div class="mio-lines" hidden>
+      <span data-mio-kind="intro">{{mio.intro}}</span>
+      <span data-mio-kind="intro">{{mio.intro.2}}</span>
+      <span data-mio-kind="intro">{{mio.intro.3}}</span>
+      <span data-mio-kind="begging">{{mio.begging}}</span>
+      <span data-mio-kind="begging">{{mio.begging.2}}</span>
+      <span data-mio-kind="begging">{{mio.begging.3}}</span>
+      <span data-mio-kind="begging">{{mio.begging.4}}</span>
+      <span data-mio-kind="begging">{{mio.begging.5}}</span>
+      <span data-mio-kind="begging">{{mio.begging.6}}</span>
+      <span data-mio-kind="reminder">{{mio.reminder}}</span>
+      <span data-mio-kind="reminder">{{mio.reminder.2}}</span>
+      <span data-mio-kind="reminder">{{mio.reminder.3}}</span>
+      <span data-mio-kind="reminder">{{mio.reminder.4}}</span>
+      <span data-mio-kind="reminder">{{mio.reminder.5}}</span>
+      <span data-mio-kind="reminder">{{mio.reminder.6}}</span>
+      <span data-mio-kind="reminder">{{mio.reminder.7}}</span>
+      <span data-mio-kind="reminder">{{mio.reminder.8}}</span>
+      <span data-mio-kind="tip">{{mio.tip.chat.1}}</span>
+      <span data-mio-kind="tip">{{mio.tip.chat.2}}</span>
+      <span data-mio-kind="tip">{{mio.tip.chat.3}}</span>
+      <span data-mio-kind="tip">{{mio.tip.chat.4}}</span>
+      <span data-mio-kind="tip">{{mio.tip.docs.1}}</span>
+      <span data-mio-kind="tip">{{mio.tip.docs.2}}</span>
+      <span data-mio-kind="tip">{{mio.tip.docs.3}}</span>
+      <span data-mio-kind="tip">{{mio.tip.docs.4}}</span>
+      <span data-mio-kind="tip">{{mio.tip.telegram.1}}</span>
+      <span data-mio-kind="tip">{{mio.tip.telegram.2}}</span>
+      <span data-mio-kind="tip">{{mio.tip.telegram.3}}</span>
+      <span data-mio-kind="tip">{{mio.tip.telegram.4}}</span>
+      <span data-mio-kind="tip">{{mio.tip.support.1}}</span>
+      <span data-mio-kind="tip">{{mio.tip.support.2}}</span>
+      <span data-mio-kind="tip">{{mio.tip.support.3}}</span>
+      <span data-mio-kind="tip">{{mio.tip.support.4}}</span>
+      <span data-mio-kind="tip">{{mio.tip.support.5}}</span>
+      <span data-mio-kind="tip">{{mio.tip.support.6}}</span>
+      <span data-mio-kind="idle">{{mio.idle.general.1}}</span>
+      <span data-mio-kind="idle">{{mio.idle.general.2}}</span>
+      <span data-mio-kind="idle">{{mio.idle.general.3}}</span>
+      <span data-mio-kind="idle">{{mio.idle.general.4}}</span>
+      <span data-mio-kind="idle">{{mio.idle.general.5}}</span>
+      <span data-mio-kind="idle">{{mio.idle.general.6}}</span>
+      <span data-mio-kind="idle">{{mio.idle.general.7}}</span>
+      <span data-mio-kind="idle">{{mio.idle.general.8}}</span>
+      <span data-mio-kind="idle-fingers">{{mio.idle.fingers.1}}</span>
+      <span data-mio-kind="idle-fingers">{{mio.idle.fingers.2}}</span>
+      <span data-mio-kind="idle-fingers">{{mio.idle.fingers.3}}</span>
+      <span data-mio-kind="idle-fingers">{{mio.idle.fingers.4}}</span>
+      <span data-mio-kind="idle-fingers">{{mio.idle.fingers.5}}</span>
+      <span data-mio-kind="idle-fingers">{{mio.idle.fingers.6}}</span>
+      <span data-mio-kind="idle-fingers">{{mio.idle.fingers.7}}</span>
+      <span data-mio-kind="idle-fingers">{{mio.idle.fingers.8}}</span>
+      <span data-mio-kind="idle-nose">{{mio.idle.nose.1}}</span>
+      <span data-mio-kind="idle-nose">{{mio.idle.nose.2}}</span>
+      <span data-mio-kind="idle-nose">{{mio.idle.nose.3}}</span>
+      <span data-mio-kind="idle-nose">{{mio.idle.nose.4}}</span>
+      <span data-mio-kind="idle-nose">{{mio.idle.nose.5}}</span>
+      <span data-mio-kind="idle-nose">{{mio.idle.nose.6}}</span>
+      <span data-mio-kind="idle-nose">{{mio.idle.nose.7}}</span>
+      <span data-mio-kind="idle-nose">{{mio.idle.nose.8}}</span>
+      <span data-mio-kind="idle-polish">{{mio.idle.polish.1}}</span>
+      <span data-mio-kind="idle-polish">{{mio.idle.polish.2}}</span>
+      <span data-mio-kind="idle-polish">{{mio.idle.polish.3}}</span>
+      <span data-mio-kind="idle-polish">{{mio.idle.polish.4}}</span>
+      <span data-mio-kind="idle-polish">{{mio.idle.polish.5}}</span>
+      <span data-mio-kind="idle-polish">{{mio.idle.polish.6}}</span>
+      <span data-mio-kind="idle-polish">{{mio.idle.polish.7}}</span>
+      <span data-mio-kind="idle-polish">{{mio.idle.polish.8}}</span>
+      <span data-mio-kind="idle-reboot">{{mio.idle.reboot.1}}</span>
+      <span data-mio-kind="idle-reboot">{{mio.idle.reboot.2}}</span>
+      <span data-mio-kind="idle-reboot">{{mio.idle.reboot.3}}</span>
+      <span data-mio-kind="idle-reboot">{{mio.idle.reboot.4}}</span>
+      <span data-mio-kind="idle-reboot">{{mio.idle.reboot.5}}</span>
+      <span data-mio-kind="idle-reboot">{{mio.idle.reboot.6}}</span>
+      <span data-mio-kind="idle-reboot">{{mio.idle.reboot.7}}</span>
+      <span data-mio-kind="idle-reboot">{{mio.idle.reboot.8}}</span>
+      <span data-mio-kind="idle-serious">{{mio.idle.serious.1}}</span>
+      <span data-mio-kind="idle-serious">{{mio.idle.serious.2}}</span>
+      <span data-mio-kind="idle-serious">{{mio.idle.serious.3}}</span>
+      <span data-mio-kind="idle-serious">{{mio.idle.serious.4}}</span>
+      <span data-mio-kind="idle-serious">{{mio.idle.serious.5}}</span>
+      <span data-mio-kind="idle-serious">{{mio.idle.serious.6}}</span>
+      <span data-mio-kind="idle-serious">{{mio.idle.serious.7}}</span>
+      <span data-mio-kind="idle-serious">{{mio.idle.serious.8}}</span>
+    </div>
+    <div class="mio-stage" aria-hidden="true">
+      <img class="mio-base" src="../assets/mio/base.png" alt="">
+      <video class="mio-video" muted playsinline preload="metadata"></video>
+      <video class="mio-video" muted playsinline preload="metadata"></video>
+    </div>
+  </aside>
+</body>
+</html>

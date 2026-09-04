@@ -1,3 +1,20 @@
+minios-welcome (6.0.3) unstable; urgency=medium
+
+  * Replace the legacy Slides/jQuery frontend with a lightweight static
+    welcome page.
+  * Generate localized HTML from Lokit-managed i18next catalogs.
+  * Add Telegram and GitHub support cards and refresh the top navigation icons.
+  * Add Mio as an animated companion with randomized idle activity, recurring
+    support reminders, contextual jokes, and useful project tips.
+  * Improve Mio playback with seamless double-buffered video transitions and
+    passive transition diagnostics.
+  * Add localized Mio text for all supported languages and expand translation
+    tests.
+  * Add compact alpha WebM runtime assets while keeping raw authoring videos out
+    of Debian source packages.
+
+ -- crims0n <crims0n@minios.dev>  Fri, 04 Sep 2026 15:29:33 +0300
+
 minios-welcome (6.0.2) unstable; urgency=medium
 
   * Refresh all supported translations.

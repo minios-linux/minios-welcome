@@ -1,7 +1,7 @@
 # Debian package build artifacts
 __pycache__/
 *.py[cod]
-/html/js/translations/en.js.tmp
+/html/locales/
 
 *.build
 *.buildinfo

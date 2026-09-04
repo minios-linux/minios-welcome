@@ -1,0 +1,105 @@
+#!/usr/bin/env python3
+
+import argparse
+import html
+import json
+import os
+import re
+import sys
+from pathlib import Path
+
+PLACEHOLDER_RE = re.compile(r"{{([a-zA-Z0-9_.-]+)}}")
+
+
+def load_catalog(path):
+    with path.open("r", encoding="utf-8") as catalog_file:
+        data = json.load(catalog_file)
+    catalog = data.get("translations") if isinstance(data, dict) else None
+    if not isinstance(catalog, dict) or not all(
+        isinstance(key, str) and isinstance(value, str)
+        for key, value in catalog.items()
+    ):
+        raise ValueError(
+            "{} must contain a string-to-string translations object".format(path)
+        )
+    return catalog
+
+def render(template, language, catalog):
+
+    def replace(match):
+        key = match.group(1)
+        if key == "language":
+            value = language
+        elif key in catalog:
+            value = catalog[key]
+        else:
+            raise ValueError("missing translation key {!r}".format(key))
+        return html.escape(value, quote=True)
+
+    rendered = PLACEHOLDER_RE.sub(replace, template)
+    unresolved = PLACEHOLDER_RE.search(rendered)
+    if unresolved:
+        raise ValueError("unresolved placeholder {!r}".format(unresolved.group(1)))
+    return rendered
+
+
+def synchronize(template_path, catalog_dir, output_dir, check=False):
+    template = template_path.read_text(encoding="utf-8")
+    catalogs = sorted(catalog_dir.glob("*.json"))
+    if not catalogs:
+        raise ValueError("no translation catalogs found in {}".format(catalog_dir))
+
+    expected = set()
+    changed = []
+    for catalog_path in catalogs:
+        language = catalog_path.stem
+        output_path = output_dir / (language + ".html")
+        expected.add(output_path.name)
+        rendered = render(template, language, load_catalog(catalog_path))
+        current = output_path.read_text(encoding="utf-8") if output_path.exists() else None
+        if current != rendered:
+            changed.append(output_path)
+            if not check:
+                output_dir.mkdir(parents=True, exist_ok=True)
+                temporary = output_path.with_suffix(".html.tmp")
+                temporary.write_text(rendered, encoding="utf-8")
+                os.replace(str(temporary), str(output_path))
+
+    if output_dir.exists():
+        for stale in output_dir.glob("*.html"):
+            if stale.name not in expected:
+                changed.append(stale)
+                if not check:
+                    stale.unlink()
+    return changed
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="Build static localized MiniOS Welcome pages from Lokit catalogs."
+    )
+    parser.add_argument("--template", default="html/welcome.html.in")
+    parser.add_argument("--catalog-dir", default="html/i18n")
+    parser.add_argument("--output-dir", default="html/locales")
+    parser.add_argument("--check", action="store_true")
+    args = parser.parse_args()
+
+    try:
+        changed = synchronize(
+            Path(args.template), Path(args.catalog_dir), Path(args.output_dir), args.check
+        )
+    except (OSError, ValueError, json.JSONDecodeError) as error:
+        print("build-localized-pages: {}".format(error), file=sys.stderr)
+        return 2
+
+    if args.check and changed:
+        for path in changed:
+            print("{} is not up to date".format(path), file=sys.stderr)
+        return 1
+    if changed:
+        print("Built {} localized welcome page(s)".format(len(changed)))
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

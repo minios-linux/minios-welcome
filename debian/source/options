@@ -2,11 +2,11 @@
 tar-ignore = .git
 tar-ignore = .gitignore
 
-# Python caches and generated translation output
+# Python caches, generated localized pages, and raw Mio authoring videos
 tar-ignore = __pycache__
 tar-ignore = *.py[cod]
-tar-ignore = html/js/translations/en.js
-tar-ignore = html/js/translations/en.js.tmp
+tar-ignore = html/locales
+tar-ignore = mio
 
 # Debian package artifacts and build state
 tar-ignore = *.build
