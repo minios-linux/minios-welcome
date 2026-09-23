@@ -1,4 +1,11 @@
-minios-welcome (6.0.3) unstable; urgency=medium
+minios-welcome (6.0.4) unstable; urgency=medium
+
+  * Move minios-welcome-patch into the localized manpage source tree and add
+    translated manuals for all supported languages.
+
+ -- crims0n <crims0n@minios.dev>  Wed, 23 Sep 2026 18:09:55 +0300
+
+minios-welcome (6.0.4) unstable; urgency=medium
 
   * Replace the legacy Slides/jQuery frontend with a lightweight static
     welcome page.

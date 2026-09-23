@@ -1,0 +1,156 @@
+# German translations for minios-welcome package
+# Copyright (C) 2026 Free Software Foundation, Inc.
+# This file is distributed under the same license as the minios-welcome package.
+# Automatically generated, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: minios-welcome 6.0.4\n"
+"POT-Creation-Date: 2026-09-22 21:42+0300\n"
+"PO-Revision-Date: 2026-09-22 18:43+0000\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. type: TH
+#: en/minios-welcome-patch.8:1
+#, no-wrap
+msgid "MINIOS-WELCOME-PATCH"
+msgstr "MINIOS-WELCOME-PATCH"
+
+#. type: TH
+#: en/minios-welcome-patch.8:1
+#, no-wrap
+msgid "September 2026"
+msgstr "September 2026"
+
+#. type: TH
+#: en/minios-welcome-patch.8:1
+#, no-wrap
+msgid "MiniOS"
+msgstr "MiniOS"
+
+#. type: TH
+#: en/minios-welcome-patch.8:1
+#, no-wrap
+msgid "System Administration"
+msgstr "Systemadministration"
+
+#. type: SH
+#: en/minios-welcome-patch.8:2
+#, no-wrap
+msgid "NAME"
+msgstr "NAME"
+
+#. type: Plain text
+#: en/minios-welcome-patch.8:4
+msgid "minios-welcome-patch - configure the Firefox MiniOS welcome page"
+msgstr ""
+"minios-welcome-patch - konfiguriert die Firefox-MiniOS-Willkommensseite"
+
+#. type: SH
+#: en/minios-welcome-patch.8:4
+#, no-wrap
+msgid "SYNOPSIS"
+msgstr "ÜBERSICHT"
+
+#. type: Plain text
+#: en/minios-welcome-patch.8:7
+msgid "B<minios-welcome-patch> [B<--check>]"
+msgstr "B<minios-welcome-patch> [B<--check>]"
+
+#. type: SH
+#: en/minios-welcome-patch.8:7
+#, no-wrap
+msgid "DESCRIPTION"
+msgstr "BESCHREIBUNG"
+
+#. type: Plain text
+#: en/minios-welcome-patch.8:14
+msgid ""
+"B<minios-welcome-patch> adds a managed block of MiniOS preferences to each "
+"supported Firefox system configuration file. Before changing a file, it "
+"stores the unmodified contents in a file with the B<.bak> suffix. Repeated "
+"invocations do not duplicate the managed block."
+msgstr ""
+"B<minios-welcome-patch> fügt jedem unterstützten Firefox-"
+"Systemkonfigurationsdatei einen verwalteten Block von MiniOS-"
+"Voreinstellungen hinzu. Vor einer Änderung wird der unveränderte Inhalt in "
+"einer Datei mit dem Suffix B<.bak> gespeichert. Mehrfache Ausführungen "
+"führen nicht zu einer Duplizierung des verwalteten Blocks."
+
+#. type: Plain text
+#: en/minios-welcome-patch.8:17
+msgid "Desktop-specific preferences are selected using B</etc/minios/config>."
+msgstr ""
+"Desktopspezifische Voreinstellungen werden über B</etc/minios/config> "
+"ausgewählt."
+
+#. type: SH
+#: en/minios-welcome-patch.8:17
+#, no-wrap
+msgid "OPTIONS"
+msgstr "OPTIONEN"
+
+#. type: TP
+#: en/minios-welcome-patch.8:18
+#, no-wrap
+msgid "B<--check>"
+msgstr "B<--check>"
+
+#. type: Plain text
+#: en/minios-welcome-patch.8:23
+msgid ""
+"Exit with status 0 when every existing supported Firefox configuration file "
+"contains the MiniOS managed block. Exit with status 3 when an existing file "
+"is not configured, or 4 when no supported configuration file exists."
+msgstr ""
+"Beendet sich mit Status 0, wenn jede vorhandene unterstützte Firefox-"
+"Konfigurationsdatei den MiniOS-verwalteten Block enthält. Beendet sich mit "
+"Status 3, wenn eine vorhandene Datei nicht konfiguriert ist, oder mit Status "
+"4, wenn keine unterstützte Konfigurationsdatei existiert."
+
+#. type: SH
+#: en/minios-welcome-patch.8:23
+#, no-wrap
+msgid "FILES"
+msgstr "DATEIEN"
+
+#. type: TP
+#: en/minios-welcome-patch.8:24
+#, no-wrap
+msgid "B</etc/minios/config>"
+msgstr "B</etc/minios/config>"
+
+#. type: Plain text
+#: en/minios-welcome-patch.8:27
+msgid "MiniOS system configuration."
+msgstr "MiniOS-Systemkonfiguration."
+
+#. type: TP
+#: en/minios-welcome-patch.8:27
+#, no-wrap
+msgid "B</usr/share/minios/html/index.html>"
+msgstr "B</usr/share/minios/html/index.html>"
+
+#. type: Plain text
+#: en/minios-welcome-patch.8:30
+msgid "Welcome page configured as the Firefox startup welcome URL."
+msgstr ""
+"Willkommensseite, die als Firefox-Start-URL für die Begrüßung konfiguriert "
+"ist."
+
+#. type: SH
+#: en/minios-welcome-patch.8:30
+#, no-wrap
+msgid "SEE ALSO"
+msgstr "SIEHE AUCH"
+
+#. type: Plain text
+#: en/minios-welcome-patch.8:31
+msgid "B<firefox>(1)"
+msgstr "B<firefox>(1)"

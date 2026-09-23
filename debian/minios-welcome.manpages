@@ -1,1 +1,9 @@
-debian/minios-welcome-patch.8
+manpages/en/minios-welcome-patch.8
+manpages/de/minios-welcome-patch.de.8
+manpages/es/minios-welcome-patch.es.8
+manpages/fr/minios-welcome-patch.fr.8
+manpages/id/minios-welcome-patch.id.8
+manpages/it/minios-welcome-patch.it.8
+manpages/pt/minios-welcome-patch.pt.8
+manpages/pt_BR/minios-welcome-patch.pt_BR.8
+manpages/ru/minios-welcome-patch.ru.8

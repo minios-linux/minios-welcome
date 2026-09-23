@@ -1,4 +1,6 @@
 # Debian package build artifacts
+/.pc/
+/obj-*/
 __pycache__/
 *.py[cod]
 /html/locales/
@@ -9,6 +11,7 @@ __pycache__/
 *.deb
 *.dsc
 *.tar.*
+*.udeb
 debian/.debhelper/
 debian/debhelper-build-stamp
 debian/files

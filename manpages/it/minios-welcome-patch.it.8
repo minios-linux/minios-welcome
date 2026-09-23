@@ -1,0 +1,34 @@
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH MINIOS\-WELCOME\-PATCH 8 "Settembre 2026" MiniOS "Amministrazione di sistema"
+.SH NOME
+minios\-welcome\-patch \- configura la pagina di benvenuto di Firefox MiniOS
+.SH SINTASSI
+\fBminios\-welcome\-patch\fP [\fB\-\-check\fP]
+.SH DESCRIZIONE
+\fBminios\-welcome\-patch\fP aggiunge un blocco gestito di preferenze MiniOS a
+ciascun file di configurazione di sistema di Firefox supportato. Prima di
+modificare un file, salva il contenuto non modificato in un file con
+suffisso \fB.bak\fP. Invocazioni ripetute non duplicano il blocco gestito.
+.PP
+Le preferenze specifiche del desktop vengono selezionate utilizzando
+\fB/etc/minios/config\fP.
+.SH OPZIONI
+.TP
+\fB\-\-check\fP
+Termina con stato 0 se ogni file di configurazione di Firefox supportato
+esistente contiene il blocco gestito MiniOS. Termina con stato 3 se un file
+esistente non è configurato, o 4 se non esiste alcun file di configurazione
+supportato.
+.SH FILE
+.TP
+\fB/etc/minios/config\fP
+Configurazione di sistema MiniOS.
+.TP
+\fB/usr/share/minios/html/index.html\fP
+Pagina di benvenuto configurata come URL di avvio di benvenuto di Firefox.
+.SH "VEDERE ANCHE"
+\fBfirefox\fP(1)

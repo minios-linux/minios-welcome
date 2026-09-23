@@ -1,0 +1,33 @@
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH MINIOS\-WELCOME\-PATCH 8 "September 2026" MiniOS "Administrasi Sistem"
+.SH NAMA
+minios\-welcome\-patch \- mengonfigurasi halaman sambutan Firefox MiniOS
+.SH SINOPSIS
+\fBminios\-welcome\-patch\fP [\fB\-\-check\fP]
+.SH DESKRIPSI
+\fBminios\-welcome\-patch\fP menambahkan blok preferensi terkelola MiniOS ke
+setiap berkas konfigurasi sistem Firefox yang didukung. Sebelum mengubah
+berkas, utilitas ini menyimpan isi asli ke berkas dengan akhiran
+\&\fB.bak\fP. Pemanggilan berulang tidak akan menduplikasi blok terkelola.
+.PP
+Preferensi khusus desktop dipilih menggunakan \fB/etc/minios/config\fP.
+.SH OPSI
+.TP
+\fB\-\-check\fP
+Keluar dengan status 0 jika setiap berkas konfigurasi Firefox yang didukung
+sudah berisi blok terkelola MiniOS. Keluar dengan status 3 jika ada berkas
+yang belum dikonfigurasi, atau 4 jika tidak ada berkas konfigurasi yang
+didukung.
+.SH BERKAS
+.TP
+\fB/etc/minios/config\fP
+Konfigurasi sistem MiniOS.
+.TP
+\fB/usr/share/minios/html/index.html\fP
+Halaman sambutan yang dikonfigurasi sebagai URL sambutan awal Firefox.
+.SH "LIHAT JUGA"
+\fBfirefox\fP(1)
